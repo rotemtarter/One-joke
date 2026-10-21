@@ -80,3 +80,9 @@ desktop.ini
 tmp/
 temp/
 *.tmp
+
+# --- Next.js ---
+next-env.d.ts
+
+# --- Design asset source archive (extracted into public/assets) ---
+spec/joke-assets.zip

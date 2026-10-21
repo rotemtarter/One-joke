@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Doodle rays, left -->
+  <path d="M34 38l16 12M22 70h20M32 104l15-10" stroke="#111827" stroke-width="6"/>
+  <!-- Doodle rays, right -->
+  <path d="M166 38l-16 12M178 70h-20M168 104l-15-10" stroke="#111827" stroke-width="6"/>
+  <!-- Face -->
+  <circle cx="100" cy="72" r="48" fill="#FACC15" stroke="#111827" stroke-width="6"/>
+  <!-- Laughing eyes: > < -->
+  <path d="M70 52l16 9-16 9M130 52l-16 9 16 9" stroke="#111827" stroke-width="6"/>
+  <!-- Open laughing mouth -->
+  <path d="M68 82h64c0 18-14 30-32 30s-32-12-32-30z" fill="#111827" stroke="#111827" stroke-width="4"/>
+  <path d="M84 100c5 5 10 7 16 7s11-2 16-7" stroke="#EF4444" stroke-width="5"/>
+</svg>
