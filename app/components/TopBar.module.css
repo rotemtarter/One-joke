@@ -1,0 +1,25 @@
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 56px;
+  padding: var(--space-12) var(--space-16);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.logoLink {
+  display: inline-flex;
+  border-radius: var(--radius-sm);
+}
+
+.logoLink:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.logo {
+  width: auto;
+  height: 36px;
+}

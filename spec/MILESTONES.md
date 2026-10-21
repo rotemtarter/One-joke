@@ -56,7 +56,7 @@
 
 ---
 
-### Milestone 2: Anonymous Session, App Shell & Privacy Page
+### Milestone 2: Anonymous Session, App Shell & Privacy Page ✅
 
 #### שם ומטרה
 - **שם:** זיהוי אנונימי של מכשירים, שלד האפליקציה ודף הפרטיות.

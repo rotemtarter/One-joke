@@ -29,6 +29,20 @@
 
 ---
 
+## 1א. הפעלת זיהוי אנונימי (Development)
+
+האתר מזהה כל מכשיר באופן אנונימי, בלי התחברות. כדי ש-Supabase יאפשר זאת, צריך להפעיל הגדרה אחת:
+
+1. נכנסים ל-[supabase.com/dashboard](https://supabase.com/dashboard) ובוחרים את הפרויקט **`one-joke-dev`**.
+2. בתפריט הצד: **Authentication** ← **Sign In / Providers** (בגרסאות מסוימות: **Providers** או **Settings**).
+3. באזור **User Signups**, מפעילים את **Allow anonymous sign-ins** ולוחצים **Save changes**.
+4. לא משנים את **Rate Limits** (Authentication ← Rate Limits). המגבלה על יצירת משתמשים אנונימיים לפי כתובת IP נשארת כמו שהיא.
+5. איך בודקים שזה עובד: אחרי שנכנסים לאתר, ב-**Authentication** ← **Users** מופיע משתמש חדש עם התווית **Anonymous**.
+
+> במהלך הבדיקות ייתכן שייווצרו כמה משתמשים אנונימיים בפרויקט הפיתוח (למשל מחלון גלישה בסתר). זה תקין.
+
+---
+
 ## 2. OpenAI — מפתח ומודל GPT-5
 
 1. נכנסים ל-[platform.openai.com](https://platform.openai.com) ומתחברים.

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Heebo, Inter } from "next/font/google";
+import TopBar from "./components/TopBar";
 import "./globals.css";
 
 // Inter covers Latin text; Hebrew glyphs fall back to Heebo (see globals.css).
@@ -36,7 +37,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="he" dir="rtl" className={`${inter.variable} ${heebo.variable}`}>
-      <body>{children}</body>
+      <body>
+        <TopBar />
+        {children}
+      </body>
     </html>
   );
 }
