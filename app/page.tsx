@@ -1,35 +1,23 @@
-import Image from "next/image";
-import Link from "next/link";
-import { DAILY_LIMIT, getQuotaStatus } from "@/lib/quota";
-import TopicForm from "./components/TopicForm";
+import { getQuotaStatus } from "@/lib/quota";
+import JokeApp from "./components/JokeApp";
+import QuotaScreen from "./components/QuotaScreen";
 import styles from "./page.module.css";
 
-// Create-joke screen (DESIGN 1.9) — the screen the site opens on.
+// The site opens on the create-joke screen (DESIGN 1.9), or straight on the quota
+// screen when the device's quota or the site cap is used up for today (DESIGN 1.5).
 export default async function Home() {
   const quota = await getQuotaStatus();
+  const quotaReached = quota !== null && (quota.remainingToday === 0 || quota.siteLimitReached);
 
   return (
-    <main className={styles.main}>
-      <Image
-        className={styles.illustration}
-        src="/assets/illustrations/illustration-laugh.svg"
-        alt=""
-        width={200}
-        height={140}
-        priority
-      />
-      <h1 className={styles.title}>מוכנים לבדיחה?</h1>
-      <p className={styles.text}>כתבו נושא, או השאירו את השדה ריק לבדיחה כללית.</p>
-      <TopicForm />
-      {/* Hidden when the quota cannot be read: never show an invented number. */}
-      {quota && (
-        <p className={styles.remaining}>
-          נשארו {quota.remainingToday} מתוך {DAILY_LIMIT} היום
-        </p>
+    <main className={styles.page}>
+      {quotaReached ? (
+        <div className={styles.main}>
+          <QuotaScreen />
+        </div>
+      ) : (
+        <JokeApp initialRemaining={quota?.remainingToday ?? null} />
       )}
-      <Link href="/privacy" className={styles.privacyLink}>
-        פרטיות
-      </Link>
     </main>
   );
 }

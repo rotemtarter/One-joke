@@ -117,7 +117,7 @@
 
 ---
 
-### Milestone 4: AI Joke Generation Engine & Main User Flow
+### Milestone 4: AI Joke Generation Engine & Main User Flow ✅
 
 #### שם ומטרה
 - **שם:** מנוע יצירת בדיחות ב-AI (GPT-5) וזרימת משתמש מרכזית מקצה לקצה.

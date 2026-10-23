@@ -1,18 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import { MAX_TOPIC_LENGTH } from "@/lib/jokes/input";
 import styles from "./TopicForm.module.css";
 
-// Same measure the server will use for topic length (string length, PRD 4.a.2).
-const MAX_TOPIC_LENGTH = 100;
-
-export default function TopicForm() {
+// An empty topic asks for a general joke (PRD 4.a.2).
+export default function TopicForm({ onSubmit }: { onSubmit: (topic: string) => void }) {
   const [topic, setTopic] = useState("");
 
   return (
-    // Generation is wired up in Milestone 4; until then Enter must not reload the page.
-    <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
-      <label htmlFor="topic" className={styles.srOnly}>
+    <form
+      className={styles.form}
+      onSubmit={(event) => {
+        event.preventDefault();
+        onSubmit(topic.trim());
+      }}
+    >
+      <label htmlFor="topic" className="sr-only">
         נושא לבדיחה
       </label>
       <input
@@ -29,7 +33,7 @@ export default function TopicForm() {
       <p className={styles.counter} aria-live="polite">
         {topic.length}/{MAX_TOPIC_LENGTH}
       </p>
-      <button type="button" className="btn-primary">
+      <button type="submit" className="btn-primary">
         צרו בדיחה
       </button>
     </form>
