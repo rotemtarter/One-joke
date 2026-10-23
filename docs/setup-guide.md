@@ -43,6 +43,20 @@
 
 ---
 
+## 1ב. כתובת החיבור למסד הנתונים (Development)
+
+הכתובת הזו מאפשרת להעלות את מבנה מסד הנתונים (Migrations) לפרויקט הפיתוח ולהריץ את הבדיקות האוטומטיות. האתר עצמו לא משתמש בה.
+
+1. נכנסים ל-[supabase.com/dashboard](https://supabase.com/dashboard) ובוחרים את הפרויקט **`one-joke-dev`** בלבד.
+2. לוחצים על הכפתור **Connect** בראש העמוד.
+3. בוחרים **Session pooler** (מתאים לכל רשת ביתית), ומעתיקים את הכתובת שמתחילה ב-`postgresql://`.
+4. מדביקים אותה ב-`.env` אחרי `SUPABASE_DB_URL=`, ומחליפים בה את `[YOUR-PASSWORD]` בסיסמת מסד הנתונים ששמרתם כשיצרתם את הפרויקט (סעיף 1). שכחתם את הסיסמה? אפשר לאפס אותה ב-**Project Settings** ← **Database** ← **Reset database password**.
+5. מוודאים שהמזהה של `one-joke-dev` מופיע בכתובת (למשל `postgres.<מזהה>@...`), כמו שבדקתם בסעיף 1.
+
+> אסור לשים כאן את הכתובת של `one-joke-prod`. את מסד הנתונים של האתר החי מעדכנים רק דרך GitHub (Milestone 5).
+
+---
+
 ## 2. OpenAI — מפתח ומודל GPT-5
 
 1. נכנסים ל-[platform.openai.com](https://platform.openai.com) ומתחברים.
@@ -67,7 +81,7 @@
 את Vercel נחבר ב-Milestone 5, יחד עם הפריסה לאתר החי. לשם כך הקוד צריך להיות ב-GitHub, ודחיפה תיעשה רק באישורכם. השלבים:
 1. נכנסים ל-[vercel.com](https://vercel.com) עם חשבון GitHub.
 2. **Add New** ← **Project** ← בוחרים את ה-repo `rotemtarter/One-joke` ← **Import**.
-3. ב-**Settings** ← **Environment Variables** מגדירים כל משתנה מ-`.env.example` לפי סביבה:
+3. ב-**Settings** ← **Environment Variables** מגדירים כל משתנה מ-`.env.example` לפי סביבה, **חוץ מ-`SUPABASE_DB_URL`**, שלא מוגדר ב-Vercel בכלל:
    - **Production** ← הפרטים של `one-joke-prod` ומפתח OpenAI (רק ב-Milestone 5).
    - **Preview** / **Development** ← הפרטים של `one-joke-dev` בלבד.
 4. תוכנית **Hobby** החינמית מיועדת לשימוש אישי בלבד. אם האתר ישמש לעסק, צריך תוכנית **Pro**.

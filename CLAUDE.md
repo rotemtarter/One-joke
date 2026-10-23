@@ -58,4 +58,5 @@
 ## פקודות הרצה
 > Claude ממלא זאת ברגע שהאפליקציה יכולה לרוץ (בדרך כלל בסיום Milestone 1), ומעדכן אם משהו משתנה.
 - **הרצה (dev):** `npm run dev` (http://localhost:3000)
-- **בדיקות (test):** `npm run lint && npx tsc --noEmit && npm run build` (בדיקות יחידה עדיין אין)
+- **בדיקות (test):** `npm run lint && npx tsc --noEmit && npm run build && npm test` (`npm test` רץ מול Supabase Development, דורש `SUPABASE_DB_URL` ב-`.env`)
+- **Migrations ל-Development:** `npm run db:push`

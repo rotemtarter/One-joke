@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run",
+    "db:push": "node scripts/db-push.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -18,12 +20,16 @@
     "server-only": "^0.0.1"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^24.19.2",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
+    "pg": "^8.23.1",
     "sharp": "^0.35.5",
-    "typescript": "^5"
+    "supabase": "2.121.0",
+    "typescript": "^5",
+    "vitest": "^5.0.5"
   }
 }

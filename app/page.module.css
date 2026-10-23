@@ -39,3 +39,8 @@
 .privacyLink:focus-visible {
   text-decoration: underline;
 }
+
+.remaining {
+  font-size: var(--fs-caption);
+  color: var(--color-text-secondary);
+}

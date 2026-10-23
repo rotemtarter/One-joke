@@ -489,3 +489,13 @@ Supabase Auth               |
 **הקשר:** סעיף 7.1 דורש cookies מאובטחים (`HttpOnly`, `Secure`, `SameSite=Lax`). ברירת המחדל של `@supabase/ssr` היא cookie שאינו HttpOnly, כדי שקוד בדפדפן יוכל להשתמש ב־session.
 **החלטה:** כל הפניות ל־Supabase נעשות בשרת (ה־Proxy ב־`proxy.ts`, ובהמשך Server Components ו־`POST /api/jokes`). ה־cookie מוגדר `httpOnly: true` ו־`sameSite: "lax"`, ו־`secure` רק ב־Production, דרך הקבוע `SUPABASE_COOKIE_OPTIONS` ב־`lib/supabase/session.ts`. אין לקוח Supabase בדפדפן. ה־Proxy יוצר משתמש אנונימי חדש רק כשאין session תקף, ולא בתקלה זמנית (שגיאת רשת, שגיאת שרת, או refresh token שכבר נוצל בבקשה מקבילה), כדי שמכשיר לא יקבל מכסה חדשה בגלל תקלה.
 **השלכות:** קוד בדפדפן אינו יכול לקרוא את ה־token. כל לקוח Supabase שייווצר בשרת בהמשך חייב להשתמש באותו קבוע. ב־`localhost` ה־cookie אינו `Secure`, כי Safari אינו שומר cookie כזה בכתובת `http`. ה־Proxy קורא את משתני Supabase ישירות מ־`process.env`, כי `lib/config/env.ts` מסומן `server-only`; קיומם נבדק בעליית השרת (ADR-3).
+
+### ADR-11: חיבור ל־Development דרך כתובת חיבור (`SUPABASE_DB_URL`), עם Supabase CLI כחבילת npm
+**הקשר:** M3 דורש להריץ Migrations על Development ולבדוק את פונקציות המכסה ישירות במסד הנתונים. `supabase login` ו־`supabase link` מוסיפים התקנה גלובלית והתחברות של ה־CLI.
+**החלטה:** ה־CLI מותקן כ־devDependency (גרסה קבועה, זהה לזו שב־workflow של Production). המשתנה `SUPABASE_DB_URL` ב־`.env` מכיל את כתובת החיבור (Session pooler) של **Development בלבד**. `npm run db:push` (`scripts/db-push.mjs`) מריץ `supabase db push --db-url`, ו־`npm test` מתחבר בעזרתו עם `pg`. שניהם טוענים את `.env` בעצמם ואינם מדפיסים את הכתובת.
+**השלכות:** האפליקציה אינה משתמשת במשתנה, הוא אינו נבדק בעליית השרת ואינו מוגדר ב־Vercel. סעיף 7.2 (בלי מפתח שרת לצורך המכסה) נשאר בתוקף: ההרשאה המוגברת משמשת רק לכלי פיתוח ולבדיקות מול Development. Production מתעדכן רק דרך ה־workflow (ADR-5).
+
+### ADR-12: לוגיקת המכסה בסכימה `private`, עם עטיפות ציבוריות בלי פרמטרים
+**הקשר:** צריך לבדוק חצות, מעברי שעון ותקרה של 300 בלי לחכות לחצות ובלי 300 מכשירים אמיתיים, ועדיין לא לאפשר למשתמש לבחור תאריך או מכשיר (ADR-4).
+**החלטה:** `private.israel_date(ts)` ו־`private.reserve_for(user_id, usage_date)` מכילות את הלוגיקה. הסכימה `private` אינה חשופה ב־API, ו־`EXECUTE`/`USAGE` נשללו מ־`anon` ו־`authenticated`. `reserve_joke_generation()` קוראת להן עם `auth.uid()` ו־`private.israel_date(now())`. הבדיקות מפעילות אותן ישירות בתאריכים שונים, ומתחזות למכשיר (`SET LOCAL ROLE authenticated` + `request.jwt.claims`) כדי לבדוק את הפונקציות הציבוריות ואת ההרשאות.
+**השלכות:** ארבע הפונקציות הציבוריות נשארות בלי פרמטרים של משתמש או תאריך. שינוי במספרים 10/300 נעשה ב־Migration, בפונקציות `reserve_for` ו־`get_quota_status`.

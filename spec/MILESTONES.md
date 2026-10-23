@@ -83,7 +83,7 @@
 
 ---
 
-### Milestone 3: Database Schema & Atomic Quota
+### Milestone 3: Database Schema & Atomic Quota ✅
 
 #### שם ומטרה
 - **שם:** מנגנון ניהול ואכיפת מכסה יומית ותקרה יומית, אטומיים, ב-Database.
